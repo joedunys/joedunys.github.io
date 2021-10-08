@@ -72,6 +72,7 @@ function play_song(mp3Url){
 	var src1 = player1.getAttribute('src');
 	var src2 = player2.getAttribute('src');
 	var message = document.getElementById("currentTrack").querySelector("span");
+	var song = mp3Url.replace('audio/','').replace('.mp3','').replace(/_/gi,' ');
 
 	if( player2.classList.contains('active') ) {
 
@@ -79,7 +80,7 @@ function play_song(mp3Url){
 			player1.classList.toggle('active');
 			player1.src = mp3Url;
 			player1.play();
-			message.innerHTML = mp3Url.replace('audio/','');
+			message.innerHTML = song;
 			player2.classList.toggle('active');
 
 			audiofade(player2,player1);
@@ -89,7 +90,7 @@ function play_song(mp3Url){
 			player2.classList.toggle('active');
 			player2.src = mp3Url;
 			player2.play();
-			message.innerHTML = mp3Url.replace('audio/','');
+			message.innerHTML = song;
 			player1.classList.toggle('active');
 
 			audiofade(player1,player2);
