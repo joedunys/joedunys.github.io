@@ -12,9 +12,10 @@ header {background-size:cover; padding: 2vh 10vw; height: 80vh;position:relative
 #media p {background-color: #262255;display: block;position: absolute;top: 0;left:4em;color: #fff;font-size: 0.5em;line-height: 2;padding: 1em;white-space: nowrap;border-radius: 0 3px 3px 0;}
 #media audio {display: none;}
 
-#main {background: url("../img/paper.jpg");background-size: contain;box-shadow:0 0 50px 50px rgba(0,0,0,0.5);padding:35px;}
-#main section{margin-bottom:2em;min-height:120vh;opacity:0.75}
-#main section.active{opacity:1}
+#main {background: url("../img/paper.jpg");background-size: contain;box-shadow:0 0 50px 50px rgba(0,0,0,0.5);padding:35px 0;}
+#main section{margin-bottom:2em;min-height:120vh;padding: 0 35px;transition: all 0.3s;}
+#main.js section{border-left:rgba(149,0,252,0) solid 7px; padding-left: 28px;opacity:0.75;}
+#main.js section.active{border-left-color:rgba(109,0,185,0.25);opacity:1}
 
 #main img {width: 80%;}
 
@@ -24,7 +25,8 @@ header {background-size:cover; padding: 2vh 10vw; height: 80vh;position:relative
 	body {font-size: 2vw;}
 	header {background-size:cover;background-attachment: fixed; padding: 2vh 10vw; height: auto;}
 
-	#main {padding:5vh 3vw;}
+	#main section {padding:0 3vw;}
+	#main.js section {border-left-width: 0.5vw; padding-left:2.5vw;}
 }
 
 @media (max-width: 767px){
