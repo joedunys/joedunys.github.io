@@ -98,11 +98,6 @@ function play_song(mp3Url,force){
 		oldplayer = document.getElementById("audioplayer2");
 	}
 
-	//find if is already playing
-	if (!newplayer.paused){
-		newplayer.pause();
-	}
-
 	newplayer.src = mp3Url;
 	newplayer.load();
 	newplayer.addEventListener('canplaythrough', function() {
