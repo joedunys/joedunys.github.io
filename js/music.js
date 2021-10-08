@@ -1,29 +1,29 @@
 // JavaScript Document
 var items = [];
 
-$("section").each(function(i){
-	var te = [];
-	var tt = this.offsetTop;
-	var tb = this.offsetTop + this.offsetHeight;
-	var ta = this.getElementsByTagName("a")[0].getAttribute("href");
-
-	this.id = "section_"+i;
-	te.push(tt,tb,ta);
-	items.push(te);
-	i++;
-})
-
 window.onbeforeunload = function () {
 	window.scrollTo(0, 0);
 }
 
 $(document).ready(function() {
 	var player1 = document.getElementById("audioplayer1");
-	var first = document.querySelector('section');
-	var cur = first.getAttribute('id').replace('section_','');
+	var cur = 0;
 	var prev = cur-1;
 	var next = cur+1;
-	first.classList.toggle('active');
+
+	//Load sections at start
+	var main = document.getElementById('main');
+	var sections = main.getElementsByTagName('section');
+
+	main.classList.toggle('js');
+
+	for (let i = 0, len = sections.length; i < len; i++) {
+		sections[i].id = "section_"+i;
+		if(i === 0) {
+			sections[i].classList.toggle('active');
+		}
+	}
+	updates(); //update heights and stuff
 
 	//Play first song on load
 	player1.classList.toggle('active');
@@ -35,6 +35,7 @@ $(document).ready(function() {
 		document.getElementById("currentTrack").querySelector("span").innerHTML = items[0][2].replace('audio/','').replace('.mp3','').replace(/_/gi,' ');
 	}, false);
 
+	// Scrolling Function
 	$(window).scroll(function() {
 		var bot = $(window).scrollTop() + $(window).innerHeight();
 		var top = $(window).scrollTop();
@@ -56,6 +57,10 @@ $(document).ready(function() {
 			play_song(items[cur][2]);
 		}
 	});
+
+	window.addEventListener("resize", updates);
+	document.addEventListener("load", updates);
+	window.addEventListener("orientationchange", updates);
 
 	//Buttons to force music
 	var musicbtns = document.getElementsByClassName("music");
@@ -84,8 +89,7 @@ function play_song(mp3Url){
 			player1.classList.toggle('active');
 			player1.src = mp3Url;
 			player1.load();
-			player1.addEventListener('canplaythrough', function() { 
-				console.log(song + ' Loaded');
+			player1.addEventListener('canplaythrough', function() {
 				player1.play();
 				audiofade(player2,player1);
 				message.innerHTML = song;
@@ -98,8 +102,7 @@ function play_song(mp3Url){
 			player2.classList.toggle('active');
 			player2.src = mp3Url;
 			player2.load();
-			player2.addEventListener('canplaythrough', function() {  
-				console.log(song + ' Loaded');
+			player2.addEventListener('canplaythrough', function() {
 				player2.play();
 				audiofade(player1,player2);
 				message.innerHTML = song;
@@ -143,4 +146,19 @@ function muteaudio(){
 	mute.classList.toggle('active');
 	unmute.classList.toggle('active');
 	
+}
+
+function updates(){
+	console.log("Updated");
+	var ups = [];
+	$("section").each(function(){
+		var te = [];
+		var tt = this.offsetTop;
+		var tb = this.offsetTop + this.offsetHeight;
+		var ta = this.getElementsByTagName("a")[0].getAttribute("href");
+
+		te.push(tt,tb,ta);
+		ups.push(te);
+	})
+	items = ups;
 }
