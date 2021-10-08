@@ -173,8 +173,9 @@ function updates(){
 	var i = 0;
 
 	$("section").each(function(){
-		var tt = this.offsetTop;
-		var tb = this.offsetTop + this.offsetHeight;
+		var divOffset = offset(this);
+		var tt = divOffset.top;
+		var tb = tt + this.offsetHeight;
 		var ta = this.getElementsByTagName("a")[0].getAttribute("href");
 		var tn = ta.replace('audio/','').replace('.mp3','').replace(/_/gi,' ');
 
@@ -189,4 +190,11 @@ function updates(){
 		i++;
 	})
 	items = ups;
+}
+
+function offset(el) {
+	var rect = el.getBoundingClientRect(),
+		scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+		scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
