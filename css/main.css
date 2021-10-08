@@ -12,7 +12,7 @@ header {background-size:cover; padding: 2vh 10vw; height: 80vh;position:relative
 #media p {background-color: #262255;display: block;position: absolute;top: 0;left:4em;color: #fff;font-size: 0.5em;line-height: 2;padding: 1em;white-space: nowrap;border-radius: 0 3px 3px 0;}
 #media audio {display: none;}
 
-#main {background: fixed url("../img/5f65dd3dec4278bd9cc3cda7_new-BL-paper.jpg");background-size: cover;box-shadow:0 0 50px 50px rgba(0,0,0,0.5);padding:35px;}
+#main {background-image: url("../img/5f65dd3dec4278bd9cc3cda7_new-BL-paper.jpg");background-size: contain;box-shadow:0 0 50px 50px rgba(0,0,0,0.5);padding:35px;}
 #main section{margin-bottom:2em;min-height:120vh;opacity:0.75}
 #main section.active{opacity:1}
 
