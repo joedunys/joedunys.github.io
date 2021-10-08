@@ -78,7 +78,6 @@ $(document).ready(function() {
 
 function play_song(mp3Url,force){
 	var message = document.getElementById("currentTrack").querySelector("span");
-	var song = mp3Url.replace('audio/','').replace('.mp3','').replace(/_/gi,' ');
 
 	//find which track it is
 	var current;
@@ -87,6 +86,7 @@ function play_song(mp3Url,force){
 			current = items[i].id;
 		}
 	}
+	var song = items[current].title;
 
 	//pick a player
 	var newplayer, oldplayer;
