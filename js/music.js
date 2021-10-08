@@ -28,7 +28,10 @@ $(document).ready(function() {
 	//Play first song on load
 	player1.classList.toggle('active');
 	player1.src = items[0][2];
-	player1.play();
+	player1.addEventListener('canplaythrough', function() { 
+		player1.play();
+	}, false);
+
 	document.getElementById("currentTrack").querySelector("span").innerHTML = items[0][2].replace('audio/','');
 
 	$(window).scroll(function() {
@@ -79,21 +82,24 @@ function play_song(mp3Url){
 		if (src2 != mp3Url){
 			player1.classList.toggle('active');
 			player1.src = mp3Url;
-			player1.play();
-			message.innerHTML = song;
-			player2.classList.toggle('active');
+			player1.addEventListener('canplaythrough', function() { 
+				player1.play();
+				audiofade(player2,player1);
+				message.innerHTML = song;
+				player2.classList.toggle('active');
+			}, false);
 
-			audiofade(player2,player1);
 		}
 	} else {
 		if (src1 != mp3Url){
 			player2.classList.toggle('active');
 			player2.src = mp3Url;
-			player2.play();
-			message.innerHTML = song;
-			player1.classList.toggle('active');
-
-			audiofade(player1,player2);
+			player2.addEventListener('canplaythrough', function() { 
+				player2.play();
+				audiofade(player1,player2);
+				message.innerHTML = song;
+				player1.classList.toggle('active');
+			}, false);
 		}
 	}
 }
